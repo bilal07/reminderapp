@@ -7,7 +7,27 @@ class App extends Component {
         text : '',
         date: new Date()
     }
+
+    render_Reminders = () => {
+        const reminders = this.props.reminders
+        return(
+            <ul className="list-group">
+                {
+                    reminders.map(reminder => {
+                        return (
+                            <li className="list-group-item" key={Math.random()}>
+                                <div>{reminder.text}</div>
+                                <div>{reminder.date}</div>
+                            </li>
+                        )
+                    })
+                }
+            </ul>
+        )
+        
+    }
     render() {
+        console.log(this.props)
         return (
             <div className="App">
                 <img src="" alt=""/>
@@ -27,11 +47,12 @@ class App extends Component {
                     onChange={(e) => {this.setState({date: e.target.value})}}
                 />
                 <button 
-                    onClick={ () => add_Reminder(this.state.text, this.state.date)}
+                    onClick={ () => this.props.add_Reminder(this.state.text, this.state.date)}
                     className="btn btn-primary btn-block"
                 >
                     Add Reminder
                 </button>
+                {this.render_Reminders()}
                 <button className="btn btn-danger btn-block">Clear Reminder</button>
             </div>
         );
@@ -43,5 +64,10 @@ class App extends Component {
 //         add_Reminder : () =>dispatch(add_Reminder())
 //     }
 // }
+// function mapStateToProps(state){
+//     return {
+//         reminders : state
+//     }
+// }
 
-export default connect(null , {add_Reminder})(App);
+export default connect(state => {return {reminders : state}} , {add_Reminder})(App);
