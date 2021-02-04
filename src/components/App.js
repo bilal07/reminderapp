@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { add_Reminder } from '../actions'
+import { add_Reminder, remove_Reminder } from '../actions'
 import { connect } from 'react-redux'
 
 class App extends Component {
@@ -18,6 +18,7 @@ class App extends Component {
                             <li className="list-group-item" key={Math.random()}>
                                 <div>{reminder.text}</div>
                                 <div>{reminder.date}</div>
+                                <div className="remove btn btn-danger" onClick={() => this.props.remove_Reminder(reminder.id)}>X</div>
                             </li>
                         )
                     })
@@ -70,4 +71,4 @@ class App extends Component {
 //     }
 // }
 
-export default connect(state => {return {reminders : state}} , {add_Reminder})(App);
+export default connect(state => {return {reminders : state}} , {add_Reminder, remove_Reminder})(App);
