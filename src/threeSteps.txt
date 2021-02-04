@@ -1,4 +1,4 @@
-1- action Types   // appel le reducer pour changer la data
-2- action creators
-3- reducers 
+1- action Types   // javascript object contient l'attibut type ; appel le reducer pour changer la data
+2- action creators  //function return action
+3- Reducers // action appel le reducer par le dispatcher    => envoyer l'action au reducers par le dispatcher
 4- jsx
