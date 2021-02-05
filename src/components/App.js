@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { add_Reminder, remove_Reminder, clear_Reminder } from '../actions'
 import { connect } from 'react-redux'
 import moment from 'moment'
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
 class App extends Component {
     state = {
         text : '',
@@ -42,12 +45,15 @@ class App extends Component {
                     placeholder="Enter what u think .."
                     onChange={(e) => {this.setState({text: e.target.value})}}
                 />
-                <input 
+                <DatePicker
                     className="form-control"
-                    type="datetime-local" 
                     value={this.state.date}
-                    placeholder="Enter what u think .."
-                    onChange={(e) => {this.setState({date: e.target.value})}}
+                    selected={this.state.date}
+                    onChange={(date) => this.setState({date})}
+                    showTimeSelect
+                    timeFormat="HH:mm"
+                    timeCaption="Time"
+                    dateFormat="MMMM d, yyy h:mm aa"
                 />
                 <button 
                     onClick={ () => {
