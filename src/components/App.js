@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import moment from 'moment'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import logo from './reminder.png'
 
 class App extends Component {
     state = {
@@ -21,7 +22,7 @@ class App extends Component {
                             <li className="list-group-item" key={Math.random()}>
                                 <div>{reminder.text}</div>
                                 <div>{moment(new Date(reminder.date)).fromNow()}</div>
-                                <div className="remove btn btn-danger" onClick={() => this.props.remove_Reminder(reminder.id)}>X</div>
+                                <div className="closeIcon btn btn-danger" onClick={() => this.props.remove_Reminder(reminder.id)}>X</div>
                             </li>
                         )
                     })
@@ -34,7 +35,7 @@ class App extends Component {
         console.log(this.props)
         return (
             <div className="App">
-                <img src="" alt=""/>
+                <img src={logo} alt=""/>
                 <div className="reminder-title">
                     <h2>what should u do ?</h2>
                 </div>
@@ -48,6 +49,7 @@ class App extends Component {
                 <DatePicker
                     className="form-control"
                     value={this.state.date}
+                    placeholderText="Enter Date ..."
                     selected={this.state.date}
                     onChange={(date) => this.setState({date})}
                     showTimeSelect
