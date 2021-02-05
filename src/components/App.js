@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { add_Reminder, remove_Reminder, clear_Reminder } from '../actions'
 import { connect } from 'react-redux'
-
+import moment from 'moment'
 class App extends Component {
     state = {
         text : '',
@@ -17,7 +17,7 @@ class App extends Component {
                         return (
                             <li className="list-group-item" key={Math.random()}>
                                 <div>{reminder.text}</div>
-                                <div>{reminder.date}</div>
+                                <div>{moment(new Date(reminder.date)).fromNow()}</div>
                                 <div className="remove btn btn-danger" onClick={() => this.props.remove_Reminder(reminder.id)}>X</div>
                             </li>
                         )
