@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { add_Reminder, remove_Reminder } from '../actions'
+import { add_Reminder, remove_Reminder, clear_Reminder } from '../actions'
 import { connect } from 'react-redux'
 
 class App extends Component {
@@ -38,23 +38,33 @@ class App extends Component {
                 <input 
                     className="form-control"
                     type="text" 
+                    value={this.state.text}
                     placeholder="Enter what u think .."
                     onChange={(e) => {this.setState({text: e.target.value})}}
                 />
                 <input 
                     className="form-control"
                     type="datetime-local" 
+                    value={this.state.date}
                     placeholder="Enter what u think .."
                     onChange={(e) => {this.setState({date: e.target.value})}}
                 />
                 <button 
-                    onClick={ () => this.props.add_Reminder(this.state.text, this.state.date)}
+                    onClick={ () => {
+                        this.props.add_Reminder(this.state.text, this.state.date)
+                        this.setState({text:'', date:''})
+                    }}
                     className="btn btn-primary btn-block"
                 >
                     Add Reminder
                 </button>
                 {this.render_Reminders()}
-                <button className="btn btn-danger btn-block">Clear Reminder</button>
+                <button 
+                    onClick={ () => { this.props.clear_Reminder() }}
+                    className="btn btn-danger btn-block"
+                >
+                    Clear Reminder
+                </button>
             </div>
         );
     }
@@ -71,4 +81,8 @@ class App extends Component {
 //     }
 // }
 
-export default connect(state => {return {reminders : state}} , {add_Reminder, remove_Reminder})(App);
+export default connect(state => {return {reminders : state}} , {
+    add_Reminder,
+    remove_Reminder,
+    clear_Reminder
+    })(App);
